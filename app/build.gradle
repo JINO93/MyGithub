@@ -42,10 +42,10 @@ dependencies {
     implementation AndroidX.material
     implementation AndroidX.constraintlayout
     implementation AndroidX.recyclerview
-    implementation AndroidX.activityKtx
     implementation AndroidX.pagingRuntime
     implementation AndroidX.swiperefreshlayout
-    implementation Fragment.runtimeKtx
+//    implementation AndroidX.activityKtx
+//    implementation Fragment.runtimeKtx
 
     // Retrofit
     implementation Retrofit.runtime
