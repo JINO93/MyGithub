@@ -23,7 +23,7 @@ object Versions {
     val activity = "1.2.1"
     val swiperefreshlayout = "1.1.0"
     val hilt = "2.42"
-    val hilt_viewmodels = "1.0.0"
+    val hilt_viewmodels = "1.0.0-alpha03"
 
     val retrofit = "2.9.0"
     val glide = "4.12.0"

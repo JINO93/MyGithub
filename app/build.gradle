@@ -73,7 +73,7 @@ dependencies {
 
     // Hilt
     implementation Hilt.hilt_Android
-    implementation Hilt.hilt_lifecycle_viewmodel
+//    implementation Hilt.hilt_lifecycle_viewmodel
     kapt Hilt.hilt_compiler
     androidTestImplementation Hilt.hilt_testing
     kaptAndroidTest Hilt.hilt_android_compiler
