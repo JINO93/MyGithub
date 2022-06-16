@@ -1,3 +1,8 @@
+plugins {
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
 import com.jino.version.plugin.*
 
 android {
@@ -11,6 +16,11 @@ android {
         versionName BuildConfig.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        buildConfigField "String", "CLIENT_ID", properties.getProperty("CLIENT_ID")
+        buildConfigField "String", "CLIENT_SECRET", properties.getProperty("CLIENT_SECRET")
     }
 
     buildFeatures {
@@ -39,19 +49,34 @@ dependencies {
     // Androidx
     implementation AndroidX.coreKtx
     implementation AndroidX.appcompat
+    implementation AndroidX.lifeCycle_Common
     implementation AndroidX.material
     implementation AndroidX.constraintlayout
     implementation AndroidX.recyclerview
     implementation AndroidX.pagingRuntime
-    implementation AndroidX.swiperefreshlayout
-//    implementation AndroidX.activityKtx
-//    implementation Fragment.runtimeKtx
+    implementation (AndroidX.swiperefreshlayout){
+        exclude group: "androidx.core" , "module":"core"
+    }
+    implementation (AndroidX.activityKtx){
+        exclude group: "androidx.core" , "module":"core"
+    }
+    implementation Fragment.runtimeKtx
 
     // Retrofit
     implementation Retrofit.runtime
     implementation Retrofit.gson
     implementation Retrofit.runtime
 
+    // Glide
+    implementation Glide.glide
+    kapt Glide.glide_compiler
+
+    // Hilt
+    implementation Hilt.hilt_Android
+    implementation Hilt.hilt_lifecycle_viewmodel
+    kapt Hilt.hilt_compiler
+    androidTestImplementation Hilt.hilt_testing
+    kaptAndroidTest Hilt.hilt_android_compiler
 
     // test
     testImplementation Depend.junit
@@ -60,4 +85,8 @@ dependencies {
 
     androidTestImplementation Fragment.testing
     testImplementation AndroidX.pagingTest
+}
+
+kapt {
+    correctErrorTypes true
 }

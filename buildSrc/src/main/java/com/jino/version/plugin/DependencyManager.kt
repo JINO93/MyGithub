@@ -5,8 +5,9 @@ package com.jino.version.plugin
  */
 
 object Versions {
-    val appcompat = "1.1.0"
+    val appcompat = "1.2.0"
     val coreKtx = "1.3.0"
+    val lifeCycle_Common = "2.3.1"
     val constraintlayout = "2.0.4"
     val material = "1.4.0"
     val paging = "3.1.1"
@@ -19,16 +20,18 @@ object Versions {
     val recyclerview = "1.0.0"
     val fragment = "1.2.1"
     val anko = "0.10.8"
-    val activity = "1.4.0"
+    val activity = "1.2.1"
     val swiperefreshlayout = "1.1.0"
+    val hilt = "2.42"
+    val hilt_viewmodels = "1.0.0"
 
     val retrofit = "2.9.0"
+    val glide = "4.12.0"
 
     val junit = "4.13.2"
     val junitExt = "1.1.3"
     val espressoCore = "3.4.0"
 
-    val jDatabinding = "1.0.1"
 }
 
 object AndroidX {
@@ -48,6 +51,7 @@ object AndroidX {
     val swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swiperefreshlayout}"
 
     val activityKtx = "androidx.activity:activity-ktx:${Versions.activity}"
+    val lifeCycle_Common = "androidx.lifecycle:lifecycle-common-java8:${Versions.lifeCycle_Common}"
 }
 
 object Room {
@@ -56,6 +60,14 @@ object Room {
     val ktx = "androidx.room:room-ktx:${Versions.room}"
     val rxjava2 = "androidx.room:room-rxjava2:${Versions.room}"
     val testing = "androidx.room:room-testing:${Versions.room}"
+}
+
+object Hilt{
+    val hilt_Android = "com.google.dagger:hilt-android:${Versions.hilt}"
+    val hilt_lifecycle_viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hilt_viewmodels}"
+    val hilt_compiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
+    val hilt_testing = "com.google.dagger:hilt-android-testing:${Versions.hilt}"
+    val hilt_android_compiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
 }
 
 object Fragment {
@@ -91,12 +103,16 @@ object Retrofit {
     val mock = "com.squareup.retrofit2:retrofit-mock:${Versions.retrofit}"
 }
 
+object Glide{
+    val glide           = "com.github.bumptech.glide:glide:${Versions.glide}"
+    val glide_compiler  = "com.github.bumptech.glide:compiler:${Versions.glide}"
+}
+
 object Depend {
 
     val junit = "junit:junit:${Versions.junit}"
     val androidTestJunit = "androidx.test.ext:junit:${Versions.junitExt}"
     val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
-    val jDatabinding = "com.hi-dhl:jdatabinding:${Versions.jDatabinding}"
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 }
 
