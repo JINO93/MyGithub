@@ -66,6 +66,7 @@ dependencies {
     implementation Retrofit.runtime
     implementation Retrofit.gson
     implementation Retrofit.runtime
+    implementation Retrofit.logging_interceptor
 
     // Glide
     implementation Glide.glide
@@ -77,6 +78,9 @@ dependencies {
     kapt Hilt.hilt_compiler
     androidTestImplementation Hilt.hilt_testing
     kaptAndroidTest Hilt.hilt_android_compiler
+
+    // jsoup
+    implementation Depend.jsoup
 
     // test
     testImplementation Depend.junit

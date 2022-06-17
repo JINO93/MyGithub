@@ -1,5 +1,7 @@
 package com.jino.mygithub.base
 
+import retrofit2.Response
+
 /**
  * 加载状态
  */
@@ -17,5 +19,18 @@ sealed class LoadStatus<T>(
             is DataError -> "Error[exception=$errorCode]"
             is Loading<T> -> "Loading"
         }
+    }
+}
+
+
+inline  fun <T> transformResponseToLoadStatus(response:Response<T>):LoadStatus<T>{
+    if(response.isSuccessful){
+        if (response.body() != null) {
+            return LoadStatus.Success(response.body()!!)
+        }else{
+            return LoadStatus.DataError<T>(response.code())
+        }
+    }else{
+        return LoadStatus.DataError<T>(response.code())
     }
 }

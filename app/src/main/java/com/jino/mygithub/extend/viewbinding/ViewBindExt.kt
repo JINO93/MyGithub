@@ -16,7 +16,7 @@ inline fun <reified VB : ViewBinding> Activity.bindViews() = lazy {
 }
 
 inline fun <reified VB: ViewBinding> Fragment.bindViews() = lazy {
-    var vb:VB?
+    var vb:VB? = null
     lifecycle.addObserver(object :DefaultLifecycleObserver{
         override fun onCreate(owner: LifecycleOwner) {
             super.onCreate(owner)
@@ -32,6 +32,7 @@ inline fun <reified VB: ViewBinding> Fragment.bindViews() = lazy {
             }
         }
     })
+    vb
 }
 
 

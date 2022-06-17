@@ -26,7 +26,9 @@ object Versions {
     val hilt_viewmodels = "1.0.0-alpha03"
 
     val retrofit = "2.9.0"
+    val logging_interceptor = "3.10.0"
     val glide = "4.12.0"
+    val jsoup = "1.11.2"
 
     val junit = "4.13.2"
     val junitExt = "1.1.3"
@@ -98,6 +100,7 @@ object Anko {
 }
 
 object Retrofit {
+    val logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.logging_interceptor}"
     val runtime = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     val gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     val mock = "com.squareup.retrofit2:retrofit-mock:${Versions.retrofit}"
@@ -109,6 +112,7 @@ object Glide{
 }
 
 object Depend {
+    val jsoup =  "org.jsoup:jsoup:${Versions.jsoup}"
 
     val junit = "junit:junit:${Versions.junit}"
     val androidTestJunit = "androidx.test.ext:junit:${Versions.junitExt}"

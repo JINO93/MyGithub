@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 
-abstract class BaseFragment:Fragment() {
+abstract class BaseFragment(layoutId:Int):Fragment(layoutId) {
 
     private var inited = false
 

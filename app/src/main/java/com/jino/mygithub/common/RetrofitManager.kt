@@ -1,7 +1,9 @@
 package com.jino.mygithub.common
 
 import com.jino.mygithub.GITHUB_API_BASE_URL
+import com.jino.mygithub.util.LogUtils
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -19,9 +21,12 @@ class RetrofitManager @Inject constructor(){
     private var retrofit: Retrofit
 
     init{
+        val logger = HttpLoggingInterceptor{
+            LogUtils.d("HttpLog",it)
+        }
         val client = OkHttpClient.Builder().apply {
 //            addInterceptor(headerInterceptor)
-//            addInterceptor(logger)
+            addInterceptor(logger)
             connectTimeout(TimeoutConnect.toLong(), TimeUnit.SECONDS)
             readTimeout(TimeoutRead.toLong(), TimeUnit.SECONDS)
         }.build()
