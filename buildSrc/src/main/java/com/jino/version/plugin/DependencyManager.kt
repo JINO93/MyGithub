@@ -24,6 +24,7 @@ object Versions {
     val swiperefreshlayout = "1.1.0"
     val hilt = "2.42"
     val hilt_viewmodels = "1.0.0-alpha03"
+    val navigation = "2.4.2"
 
     val retrofit = "2.9.0"
     val logging_interceptor = "3.10.0"
@@ -70,6 +71,11 @@ object Hilt{
     val hilt_compiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
     val hilt_testing = "com.google.dagger:hilt-android-testing:${Versions.hilt}"
     val hilt_android_compiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+}
+
+object Navigatio{
+    val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+    val navigation_ui_ktx = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
 }
 
 object Fragment {

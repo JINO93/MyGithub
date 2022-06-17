@@ -70,6 +70,7 @@ dependencies {
 
     // Glide
     implementation Glide.glide
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt Glide.glide_compiler
 
     // Hilt
@@ -78,6 +79,10 @@ dependencies {
     kapt Hilt.hilt_compiler
     androidTestImplementation Hilt.hilt_testing
     kaptAndroidTest Hilt.hilt_android_compiler
+
+    //navigation
+    implementation Navigatio.navigation_fragment
+    implementation Navigatio.navigation_ui_ktx
 
     // jsoup
     implementation Depend.jsoup

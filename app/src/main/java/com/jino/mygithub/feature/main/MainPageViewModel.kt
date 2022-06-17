@@ -19,7 +19,7 @@ class MainPageViewModel @Inject constructor():BaseViewModel() {
     private val repoRepository: RepoRepository = RepoRepository(RetrofitManager())
 
     fun fetchMainPageData(): Flow<PagingData<ReposUIModel>> {
-        return Pager<Int,ReposUIModel>(
+        return Pager(
             config = PagingConfig(PAGE_SIZE),
             pagingSourceFactory = {MainPageDataSource(repoRepository)}
         ).flow

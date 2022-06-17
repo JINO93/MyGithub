@@ -12,12 +12,17 @@ import com.jino.mygithub.extend.invisible
 import com.jino.mygithub.extend.viewbinding.bindViews
 import com.jino.mygithub.extend.visible
 import com.jino.mygithub.feature.login.LoginViewModel
+import com.jino.mygithub.util.LogUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainPageFragment : BaseFragment(R.layout.fragment_main_page) {
+
+    companion object{
+        const val TAG = "MainPageFragment"
+    }
 
     private lateinit var mViewModel :MainPageViewModel
     private val mViewBinding by bindViews<FragmentMainPageBinding>()
@@ -37,6 +42,7 @@ class MainPageFragment : BaseFragment(R.layout.fragment_main_page) {
             }
 
             mAdapter.addLoadStateListener {states->
+                LogUtils.d("TAG","list addLoadStateListener states:$states")
                 when (states.refresh) {
                     is LoadState.NotLoading -> {
 //                        progressBar?.visibility = View.INVISIBLE
@@ -64,8 +70,9 @@ class MainPageFragment : BaseFragment(R.layout.fragment_main_page) {
     }
 
     override fun initData() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             mViewModel.fetchMainPageData().collect {
+                LogUtils.d(TAG,"onData:$it")
                 mAdapter.submitData(it)
             }
         }

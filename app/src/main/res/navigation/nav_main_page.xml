@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main_page"
+    app:startDestination="@id/fragment_main_page">
+
+    <fragment
+        android:id="@+id/fragment_main_page"
+        android:name="com.jino.mygithub.feature.main.MainPageFragment"
+        tools:layout="@layout/fragment_main_page"
+        android:label="fragment_main_page">
+<!--        <action-->
+<!--            android:id="@+id/action_fragment_a_to_b"-->
+<!--            app:destination="@id/fragment_b" />-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_search"
+        android:name="com.jino.mygithub.feature.search.SearchFragment"
+        tools:layout="@layout/fragment_search"
+        android:label="fragment_search">
+        <!--        <action-->
+        <!--            android:id="@+id/action_fragment_a_to_b"-->
+        <!--            app:destination="@id/fragment_b" />-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_personal"
+        android:name="com.jino.mygithub.feature.personal.PersonalFragment"
+        tools:layout="@layout/fragment_personal"
+        android:label="fragment_personal">
+<!--        <action-->
+<!--            android:id="@+id/action_fragment_a_to_b"-->
+<!--            app:destination="@id/fragment_b" />-->
+    </fragment>
+
+</navigation>
