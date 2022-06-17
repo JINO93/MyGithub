@@ -1,4 +1,4 @@
-package com.jino.mygithub.feature.main
+package com.jino.mygithub.feature.search
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -14,14 +14,14 @@ import com.jino.mygithub.datasource.RepoDataSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class MainPageViewModel @Inject constructor():BaseViewModel() {
+class SearchViewModel @Inject constructor():BaseViewModel() {
 
     private val repoRepository: RepoRepository = RepoRepository(RetrofitManager())
 
-    fun fetchMainPageData(): Flow<PagingData<ReposUIModel>> {
+    fun searchWithKeyword(keyword:String): Flow<PagingData<ReposUIModel>> {
         return Pager(
             config = PagingConfig(PAGE_SIZE),
-            pagingSourceFactory = {RepoDataSource(repoRepository,"Android")}
+            pagingSourceFactory = {RepoDataSource(repoRepository,keyword)}
         ).flow
             .cachedIn(viewModelScope)
     }

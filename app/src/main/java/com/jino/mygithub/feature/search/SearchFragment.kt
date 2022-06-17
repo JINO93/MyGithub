@@ -1,60 +1,77 @@
 package com.jino.mygithub.feature.search
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jino.mygithub.R
+import com.jino.mygithub.base.BaseFragment
+import com.jino.mygithub.databinding.FragmentSearchBinding
+import com.jino.mygithub.extend.invisible
+import com.jino.mygithub.extend.viewbinding.bindViews
+import com.jino.mygithub.extend.visible
+import com.jino.mygithub.feature.main.MainPageFragment
+import com.jino.mygithub.util.LogUtils
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class SearchFragment : BaseFragment(R.layout.fragment_search) {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SearchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class SearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var mViewModel: SearchViewModel
+    private val mViewBinding by bindViews<FragmentSearchBinding>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private lateinit var mAdapter: SearchPageAdapter
+
+    override fun initListener() {
+
+    }
+
+    override fun initView() {
+        mViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
+        mAdapter = SearchPageAdapter()
+        mViewBinding?.let {
+            it.searchIconBtn.setOnClickListener { v->
+                val text = it.searchEditText.text.toString()
+                if(text.isEmpty()){
+                    Toast.makeText(context, "请输入搜索内容", Toast.LENGTH_SHORT).show()
+                }else{
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        mViewModel.searchWithKeyword(text).collect {
+                            LogUtils.d(MainPageFragment.TAG,"onData:$it")
+                            mAdapter.submitData(it)
+                        }
+                    }
+                }
+            }
+
+            with(it.rvSearch){
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+                adapter = mAdapter
+            }
+
+            mAdapter.addLoadStateListener {states->
+                LogUtils.d("TAG","list addLoadStateListener states:$states")
+                when (states.refresh) {
+                    is LoadState.NotLoading -> {
+//                        progressBar?.visibility = View.INVISIBLE
+                        it.rvSearch.visible()
+
+                    }
+                    is LoadState.Loading -> {
+//                        progressBar?.visibility = View.VISIBLE
+                        it.rvSearch.invisible()
+                    }
+                    is LoadState.Error -> {
+//                        progressBar?.visibility = View.INVISIBLE
+                    }
+                }
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+    override fun initData() {
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SearchFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SearchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

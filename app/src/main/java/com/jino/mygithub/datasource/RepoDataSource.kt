@@ -8,7 +8,7 @@ import com.jino.mygithub.bean.ui.ReposUIModel
 import com.jino.mygithub.util.LogUtils
 import kotlinx.coroutines.flow.collect
 
-class MainPageDataSource(private val repository: RepoRepository): PagingSource<Int, ReposUIModel>() {
+class RepoDataSource(private val repository: RepoRepository,private val keyword:String): PagingSource<Int, ReposUIModel>() {
     override fun getRefreshKey(state: PagingState<Int, ReposUIModel>): Int? {
         return null
     }
@@ -17,7 +17,7 @@ class MainPageDataSource(private val repository: RepoRepository): PagingSource<I
         return try {
             val page = params.key ?: 1
             val pageSize = params.loadSize
-            val loadState = repository.searchRepo(q = "Android", page = page)
+            val loadState = repository.searchRepo(q = keyword, page = page)
             if(loadState is LoadStatus.Success<*>){
                 val items =  loadState.data as List<ReposUIModel>
                 val preKey = if (page > 1) page - 1 else null
