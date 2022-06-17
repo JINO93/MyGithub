@@ -63,7 +63,7 @@ class LoginWebActivity : BaseActivity() {
                     view: WebView?,
                     request: WebResourceRequest?
                 ): Boolean {
-                    LogUtils.d("JINO","shouldOverrideUrlLoading  url:${request?.url}")
+                    LogUtils.d("JINO", "shouldOverrideUrlLoading  url:${request?.url}")
                     if (request != null && request.url != null &&
                         request.url.toString().startsWith(AUTHED_URL)
                     ) {
@@ -78,7 +78,7 @@ class LoginWebActivity : BaseActivity() {
 
                 override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                     super.onPageStarted(view, url, favicon)
-                    LogUtils.d("JINO","onPageStarted  url:$url")
+                    LogUtils.d("JINO", "onPageStarted  url:$url")
                 }
 
                 override fun onPageFinished(view: WebView?, url: String?) {
@@ -86,13 +86,14 @@ class LoginWebActivity : BaseActivity() {
                     mViewBinding.oauthWebviewLoadingBar.gone()
                 }
             }
+            this.webViewClient = webViewClient
 
-//            val url = "https://github.com/login/oauth/authorize?" +
-//                    "client_id=${BuildConfig.CLIENT_ID}&" +
-//                    "state=app&redirect_uri=$AUTHED_URL"
-            val url = "https://www.baidu.com"
+            val url = "https://github.com/login/oauth/authorize?" +
+                    "client_id=${BuildConfig.CLIENT_ID}&" +
+                    "state=app&redirect_uri=$AUTHED_URL"
+//            val url = "https://www.baidu.com"
             LogUtils.d("JINO","load  url:$url")
-            loadUrl(url)
+            this.loadUrl(url)
 
         }
     }
