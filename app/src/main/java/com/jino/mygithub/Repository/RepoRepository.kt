@@ -35,23 +35,20 @@ class RepoRepository @Inject constructor(private val retrofitManager: RetrofitMa
 //            }
 //    }
 
-    suspend fun searchRepo(q: String, sort: String = "", order: String = "", page: Int):Flow<LoadStatus<List<ReposUIModel>>>{
+    suspend fun searchRepo(q: String, sort: String = "", order: String = "", page: Int):LoadStatus<List<ReposUIModel>>{
         LogUtils.d(TAG,"searchRepo q:$q, page:$page")
-        return flow {
-            emit(mRepoService.searchRepos(q,sort, order, page))
-        }.flowOn(Dispatchers.IO)
-            .onEach {
-                LogUtils.d(TAG,"search rsp:$it")
-            }
-            .map {
-                transformResponseToLoadStatus(it)
-            }.map {
-                val retList = mutableListOf<ReposUIModel>()
-                it.data?.items?.forEach { repo->
-                    retList.add(RepoConversion.reposToReposUIModel(repo))
-                }
-                LoadStatus.Success(retList)
-            }
+
+        val searchRepos = mRepoService.searchRepos(q, sort, order, page)
+        LogUtils.d(TAG,"search rsp:$searchRepos")
+        val loadStatus = transformResponseToLoadStatus(searchRepos)
+        if(loadStatus.errorCode?:0 != 0){
+            return LoadStatus.DataError(loadStatus.errorCode?:-1)
+        }
+        val retList = mutableListOf<ReposUIModel>()
+        loadStatus.data?.items?.forEach { repo->
+            retList.add(RepoConversion.reposToReposUIModel(repo))
+        }
+        return LoadStatus.Success(retList)
     }
 
 

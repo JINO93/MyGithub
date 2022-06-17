@@ -1,5 +1,6 @@
 package com.jino.mygithub.common
 
+import com.jino.mygithub.BuildConfig
 import com.jino.mygithub.GITHUB_API_BASE_URL
 import com.jino.mygithub.util.LogUtils
 import okhttp3.OkHttpClient
@@ -23,6 +24,11 @@ class RetrofitManager @Inject constructor(){
     init{
         val logger = HttpLoggingInterceptor{
             LogUtils.d("HttpLog",it)
+        }
+        logger.level = if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor.Level.BODY
+        } else {
+            HttpLoggingInterceptor.Level.NONE
         }
         val client = OkHttpClient.Builder().apply {
 //            addInterceptor(headerInterceptor)

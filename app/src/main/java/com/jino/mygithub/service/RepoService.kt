@@ -16,7 +16,7 @@ interface RepoService {
         @Query("since") since: String): Response<String>
 
     @GET("search/repositories")
-    fun searchRepos(
+    suspend fun searchRepos(
         @Query(value = "q", encoded = true) query: String,
         @Query("sort") sort: String = "best%20match",
         @Query("order") order: String = "desc",
