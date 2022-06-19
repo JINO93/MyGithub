@@ -1,5 +1,9 @@
 package com.jino.mygithub.feature.search
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -16,12 +20,20 @@ import com.jino.mygithub.util.LogUtils
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class SearchFragment : BaseFragment(R.layout.fragment_search) {
+class SearchFragment : BaseFragment() {
 
     private lateinit var mViewModel: SearchViewModel
     private val mViewBinding by bindViews<FragmentSearchBinding>()
 
     private lateinit var mAdapter: SearchPageAdapter
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return mViewBinding?.root
+    }
 
     override fun initListener() {
 

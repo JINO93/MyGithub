@@ -6,10 +6,10 @@
     android:orientation="vertical"
     tools:context=".feature.main.MainPageFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/main_page_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+<!--    <com.google.android.material.appbar.MaterialToolbar-->
+<!--        android:id="@+id/main_page_toolbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"/>-->
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/main_page_freshlayout"

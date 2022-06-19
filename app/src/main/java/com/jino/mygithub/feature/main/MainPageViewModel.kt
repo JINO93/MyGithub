@@ -9,14 +9,14 @@ import com.jino.mygithub.PAGE_SIZE
 import com.jino.mygithub.Repository.RepoRepository
 import com.jino.mygithub.base.BaseViewModel
 import com.jino.mygithub.bean.ui.ReposUIModel
-import com.jino.mygithub.common.RetrofitManager
 import com.jino.mygithub.datasource.RepoDataSource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class MainPageViewModel @Inject constructor():BaseViewModel() {
+@HiltViewModel
+class MainPageViewModel @Inject constructor(private val repoRepository: RepoRepository):BaseViewModel() {
 
-    private val repoRepository: RepoRepository = RepoRepository(RetrofitManager())
 
     fun fetchMainPageData(): Flow<PagingData<ReposUIModel>> {
         return Pager(

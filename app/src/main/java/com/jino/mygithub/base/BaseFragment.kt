@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 
-abstract class BaseFragment(layoutId:Int):Fragment(layoutId) {
+abstract class BaseFragment:Fragment() {
 
     private var inited = false
 
@@ -36,5 +36,5 @@ abstract class BaseFragment(layoutId:Int):Fragment(layoutId) {
         initData()
     }
 
-    open fun needLazyInit() = true
+    open fun needLazyInit() = false
 }

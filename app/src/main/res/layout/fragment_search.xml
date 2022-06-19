@@ -30,7 +30,6 @@
                 android:imeOptions="actionSearch"
                 android:padding="10dp"
                 android:singleLine="true"
-                android:text="@={searchViewModel.query}"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15dp" />
 

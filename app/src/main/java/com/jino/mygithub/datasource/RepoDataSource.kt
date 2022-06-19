@@ -9,6 +9,7 @@ import com.jino.mygithub.util.LogUtils
 import kotlinx.coroutines.flow.collect
 
 class RepoDataSource(private val repository: RepoRepository,private val keyword:String): PagingSource<Int, ReposUIModel>() {
+
     override fun getRefreshKey(state: PagingState<Int, ReposUIModel>): Int? {
         return null
     }
@@ -22,6 +23,7 @@ class RepoDataSource(private val repository: RepoRepository,private val keyword:
                 val items =  loadState.data as List<ReposUIModel>
                 val preKey = if (page > 1) page - 1 else null
                 val nextKey = if (items.isNotEmpty()) page + 1 else null
+                LogUtils.d(TAG,"load data success ${items.joinToString { it.toString() }}")
                 LoadResult.Page(items, preKey, nextKey)
             }else{
                 LoadResult.Error(java.lang.Exception("no data"))
@@ -31,5 +33,9 @@ class RepoDataSource(private val repository: RepoRepository,private val keyword:
             LogUtils.e("MainPageDataSource","load error:${e.message}")
             LoadResult.Error(e)
         }
+    }
+
+    companion object {
+        private const val TAG = "RepoDataSource"
     }
 }
